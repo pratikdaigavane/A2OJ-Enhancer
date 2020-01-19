@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "A2OJ Enhancer",
+  "description": "Make A2OJ dynamic again!",
+  "version": "1.0.0",
+  "icons": {
+    "128": "icons/icon-128x128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "128": "icons/icon-128x128.png"
+    },
+    "default_title": "A2OJ Enhancer"
+  },
+  "background": {
+    "scripts": ["eventPage.js"],
+    "persistent": false
+  },
+  "content_scripts":[
+    {
+      "matches": ["https://www.a2oj.com/*"],
+      "js": ["jquery-3.4.1.min.js","bootstrap.min.js","content.js"],
+      "css": ["content.css","bootstrap.min.css"]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://www.a2oj.com/*"
+  ]
+}
