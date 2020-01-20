@@ -7,6 +7,7 @@ let organization = '';
 
     function hello (e) {
         e.preventDefault();
+        $("#loginButton").addClass('disabled');
         let val = $('#userName').val();
         console.log(val);
         fetch(`https://codeforces.com/api/user.info?handles=${val}`)
@@ -17,7 +18,7 @@ let organization = '';
                     chrome.storage.sync.set({
                         'userName': data.result[0].handle,
                         'userImg': `https:${data.result[0].titlePhoto}` || 'https://pratikdaigavane.github.io/img.png',
-                        'userFullName': `${data.result[0].firstName} ${data.result[0].lastName}` || '',
+                        'userFullName': (data.result[0].firstName || ' ')+ " " + (data.result[0].lastName || ' '),
                         'userRating': data.result[0].rating || '',
                         'userOrg': data.result[0].organization || ''
                     }, function () {
@@ -26,10 +27,14 @@ let organization = '';
                     });
                 } else {
                     alert('invalid username')
+                    $("#loginButton").removeClass('disabled');
+
                 }
             })
             .catch(() => {
                 alert('invalid username')
+                $("#loginButton").removeClass('disabled');
+
             })
     }
 
@@ -112,13 +117,12 @@ function doALlStuff() {
                 })
             })
             .then(() => {
-                console.log(userProb)
                 let x = $("table > tbody > tr >td >a")
                 x.each((index, tr) => {
                     var temp = tr.href;
-                    temp = temp.split('problem/')
+                    temp = temp.split('problem/')                    
                     if (userProb.has(temp[1])) {
-                        finalProb.push(temp[1])
+                        finalProb.push("problem/"+temp[1])
                     }
                 })
             })
