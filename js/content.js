@@ -75,7 +75,7 @@ function doALlStuff() {
         "  </div>\n" +
         "<div class=\"dropdown\">\n" +
         `    <img src="${userImg}" width="30" height="30" class="d-inline-block align-top rounded">` +
-        `    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">${user}</a>\n` +
+        `    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" style="color:white">${user}</a>\n` +
         "    <div class=\"dropdown-menu dropdown-menu-right\">\n" +
         "<div class='container-fluid'>" +
         "<div class='row'><div class='col'>" +
@@ -101,9 +101,10 @@ function doALlStuff() {
     setTimeout(()=>{
         document.getElementById("formUsr").addEventListener("submit", hello);
     },1000)
-
+    $("table > tbody > tr >th").last().text('Difficulty / Submission')
     let userProb = new Set();
     let finalProb = []
+    let submissions = {}
     if (user !== 'Add UserName') {
         fetch(`https://codeforces.com/api/user.status?handle=${user}&from=1&count=5000`)
             .then(res => res.json())
@@ -113,6 +114,10 @@ function doALlStuff() {
                     // console.log(`${x.problem.contestId} ${x.problem.index} => ${x.verdict}`);
                     if (x.verdict === 'OK') {
                         userProb.add(`${x.problem.contestId}/${x.problem.index}`)
+                        //1295/submission/69833817
+                        if(!(x.problem.contestId in submissions)){
+                            submissions[`problem/${x.problem.contestId}/${x.problem.index}`] = `${x.problem.contestId}/submission/${x.id}`;
+                        }
                     }
                 })
             })
@@ -128,13 +133,22 @@ function doALlStuff() {
             })
             .then(() => {
                 finalProb.map((url) => {
+                    sub_url = `https://codeforces.com/contest/${submissions[url]}`
                     var hello = $("a[href$=" + "'" + url + "'" + "]")
-                    hello.css('color', 'white')
+                    hello.css('color', '#001eff')
                     hello.parent().parent().css({
-                        "background-color": "green",
-                        "color": "white"
+                        "background-color": "#00e676",
+                        "color": "black"
                     })
+                    hello.parent().parent().hover(function(){
+                        $(this).css("background-color", "#00c853");
+                        }, function(){
+                        $(this).css("background-color", "#00e676");
+                      });
+                    hello.parent().parent().children().last().html(`<a href="${sub_url}" target="_blank"><span class="badge badge-dark">View Submission</span></a>`)
+
                 })
+                console.log(submissions)
 
             });
     }
