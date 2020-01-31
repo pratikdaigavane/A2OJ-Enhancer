@@ -1,42 +1,42 @@
-chrome.runtime.sendMessage({todo: "showPageAction"});
+chrome.runtime.sendMessage({ todo: "showPageAction" });
 let user = 'Add UserName';
 let userImg = 'https://pratikdaigavane.github.io/img.png';
 let fullName = '';
 let rating = '';
 let organization = '';
 
-    function hello (e) {
-        e.preventDefault();
-        $("#loginButton").addClass('disabled');
-        let val = $('#userName').val();
-        console.log(val);
-        fetch(`https://codeforces.com/api/user.info?handles=${val}`)
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === 'OK') {
-                    console.log(data.result[0]);
-                    chrome.storage.sync.set({
-                        'userName': data.result[0].handle,
-                        'userImg': `https:${data.result[0].titlePhoto}` || 'https://pratikdaigavane.github.io/img.png',
-                        'userFullName': (data.result[0].firstName || ' ')+ " " + (data.result[0].lastName || ' '),
-                        'userRating': data.result[0].rating || '',
-                        'userOrg': data.result[0].organization || ''
-                    }, function () {
-                        console.log('done');
-                        location.reload();
-                    });
-                } else {
-                    alert('invalid username')
-                    $("#loginButton").removeClass('disabled');
-
-                }
-            })
-            .catch(() => {
+function hello(e) {
+    e.preventDefault();
+    $("#loginButton").addClass('disabled');
+    let val = $('#userName').val();
+    console.log(val);
+    fetch(`https://codeforces.com/api/user.info?handles=${val}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'OK') {
+                console.log(data.result[0]);
+                chrome.storage.sync.set({
+                    'userName': data.result[0].handle,
+                    'userImg': `https:${data.result[0].titlePhoto}` || 'https://pratikdaigavane.github.io/img.png',
+                    'userFullName': (data.result[0].firstName || ' ') + " " + (data.result[0].lastName || ' '),
+                    'userRating': data.result[0].rating || '',
+                    'userOrg': data.result[0].organization || ''
+                }, function () {
+                    console.log('done');
+                    location.reload();
+                });
+            } else {
                 alert('invalid username')
                 $("#loginButton").removeClass('disabled');
 
-            })
-    }
+            }
+        })
+        .catch(() => {
+            alert('invalid username')
+            $("#loginButton").removeClass('disabled');
+
+        })
+}
 
 
 
@@ -75,7 +75,7 @@ function doALlStuff() {
         "  </div>\n" +
         "<div class=\"dropdown\">\n" +
         `    <img src="${userImg}" width="30" height="30" class="d-inline-block align-top rounded">` +
-        `    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" style="color:white">${user}</a>\n` +
+        `    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" style="font-weight:bold">${user}</a>\n` +
         "    <div class=\"dropdown-menu dropdown-menu-right\">\n" +
         "<div class='container-fluid'>" +
         "<div class='row'><div class='col'>" +
@@ -98,9 +98,9 @@ function doALlStuff() {
 
         "</div>" +
         "</nav><br/><br/><br/><br/>");
-    setTimeout(()=>{
+    setTimeout(() => {
         document.getElementById("formUsr").addEventListener("submit", hello);
-    },1000)
+    }, 1000)
     $("table > tbody > tr >th").last().text('Difficulty / Submission')
     let userProb = new Set();
     let finalProb = []
@@ -115,7 +115,7 @@ function doALlStuff() {
                     if (x.verdict === 'OK') {
                         userProb.add(`${x.problem.contestId}/${x.problem.index}`)
                         //1295/submission/69833817
-                        if(!(x.problem.contestId in submissions)){
+                        if (!(x.problem.contestId in submissions)) {
                             submissions[`problem/${x.problem.contestId}/${x.problem.index}`] = `${x.problem.contestId}/submission/${x.id}`;
                         }
                     }
@@ -125,9 +125,9 @@ function doALlStuff() {
                 let x = $("table > tbody > tr >td >a")
                 x.each((index, tr) => {
                     var temp = tr.href;
-                    temp = temp.split('problem/')                    
+                    temp = temp.split('problem/')
                     if (userProb.has(temp[1])) {
-                        finalProb.push("problem/"+temp[1])
+                        finalProb.push("problem/" + temp[1])
                     }
                 })
             })
@@ -140,12 +140,14 @@ function doALlStuff() {
                         "background-color": "#00e676",
                         "color": "black"
                     })
-                    hello.parent().parent().hover(function(){
+                    hello.parent().parent().hover(function () {
                         $(this).css("background-color", "#00c853");
-                        }, function(){
+                    }, function () {
                         $(this).css("background-color", "#00e676");
-                      });
-                    hello.parent().parent().children().last().html(`<a href="${sub_url}" target="_blank"><span class="badge badge-dark">View Submission</span></a>`)
+                    });
+                    let difficulty = hello.parent().parent().children().last().text()
+                    // console.log(difficulty);
+                    hello.parent().parent().children().last().html(`<span>${difficulty}</span> &nbsp;&nbsp;&nbsp;<a href="${sub_url}" target="_blank"><span class="badge badge-dark">View Submission</span></a>`)
 
                 })
                 console.log(submissions)
