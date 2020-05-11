@@ -1,11 +1,15 @@
 chrome.runtime.sendMessage({ todo: "showPageAction" });
+
+// Variables to maintain the current session
 let user = 'Add UserName';
 let userImg = 'https://pratikdaigavane.github.io/img.png';
 let fullName = '';
 let rating = '';
 let organization = '';
 
-function hello(e) {
+function loginIn(e) {
+    // querying the codeforces endpoint to check whether username exits,
+    // if yes then its details are stored in local storage
     e.preventDefault();
     $("#loginButton").addClass('disabled');
     let val = $('#userName').val();
@@ -42,6 +46,8 @@ function hello(e) {
 
 
 chrome.storage.sync.get(['userName', 'userImg', 'userFullName', 'userRating', 'userOrg'], function (budget) {
+    // when user opens a2oj.com,  checking if the details is present in localsotrage
+    // and if then assigning those values to current session variables
     if (budget.userName !== undefined) {
         user = budget.userName;
         userImg = budget.userImg || 'https://pratikdaigavane.github.io/img.png';
@@ -49,11 +55,12 @@ chrome.storage.sync.get(['userName', 'userImg', 'userFullName', 'userRating', 'u
         rating = ("Rating: " + budget.userRating) || '';
         organization = budget.userOrg || '';
     }
-    doALlStuff();
+    renderResults();
 });
 
-function doALlStuff() {
+function renderResults() {
 
+    //some injectible HTML to modify the curent a2oj table
     const table = $("table");
     $('u').addClass('display-4').css('text-decoration', 'none');
     table.wrap("<div class='container'></div>");
@@ -98,9 +105,13 @@ function doALlStuff() {
 
         "</div>" +
         "</nav><br/><br/><br/><br/>");
+
+    //after the dom is loaded, add to event listener to login button
     setTimeout(() => {
-        document.getElementById("formUsr").addEventListener("submit", hello);
+        document.getElementById("formUsr").addEventListener("submit", loginIn);
     }, 1000)
+
+    //Now, calling the codeforces API and rendering those changes in table
     $("table > tbody > tr >th").last().text('Difficulty / Submission')
     let userProb = new Set();
     let finalProb = []
@@ -151,7 +162,6 @@ function doALlStuff() {
 
                 })
                 console.log(submissions)
-
             });
     }
 }
