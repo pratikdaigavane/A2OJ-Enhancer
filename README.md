@@ -2,6 +2,8 @@
 
 > Make A2OJ Dynamic Again!
 
+[![HitCount](http://hits.dwyl.com/pratikdaigavane/A2OJ-Enhancer.svg)](http://hits.dwyl.com/pratikdaigavane/A2OJ-Enhancer)
+
 A chrome extension to enhance the functionality of https://a2oj.com.
 This project came into existence after a2oj.com was made static.
 
