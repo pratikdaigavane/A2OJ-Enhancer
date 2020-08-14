@@ -66,17 +66,17 @@ function renderResults() {
     table.wrap("<div class='container'></div>");
     table.addClass("table table-bordered table-hover table-curved");
     $('body').prepend("<nav class=\"navbar fixed-top navbar-expand-lg navbar-dark bg-dark\" >\n" +
-        "  <a class=\"navbar-brand\" href=\"https://www.a2oj.com/\">A2 Online Judge</a>\n" +
+        "  <a class=\"navbar-brand\" href=\"https://a2oj.pratikdaigavane.me/\">A2 Online Judge</a>\n" +
         "  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
         "    <span class=\"navbar-toggler-icon\"></span>\n" +
         "  </button>\n" +
         "  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n" +
         "    <ul class=\"navbar-nav mr-auto\">\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"https://www.a2oj.com/Ladders.html\">Ladders</a>\n" +
+        "        <a class=\"nav-link\" href=\"https://a2oj.pratikdaigavane.me/Ladders.html\">Ladders</a>\n" +
         "      </li>\n" +
         "      <li class=\"nav-item\">\n" +
-        "        <a class=\"nav-link\" href=\"https://www.a2oj.com/Categories.html\">Categories</a>\n" +
+        "        <a class=\"nav-link\" href=\"https://a2oj.pratikdaigavane.me/Categories.html\">Categories</a>\n" +
         "      </li>\n" +
         "    </ul>\n" +
         "  </div>\n" +
@@ -97,9 +97,10 @@ function renderResults() {
         "  </div>\n" +
         `</form><div class='row'><div class='col text-center'><strong>A2OJ Enhancer</strong><p>by Pratik Daigavane</p></div></div>` +
         `<div class='row'>` +
-        `<div class='col text-center'><a href='https://github.com/pratikdaigavane' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/github.svg' alt=''></a></div>` +
-        `<div class='col text-center'><a href='mailto:daigavanep@gmail.com' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/email.svg' alt=''></a></div>` +
-        `<div class='col text-center'><a href='https://linkedin.com/in/pratikdaigavane' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/linkedin.svg' alt=''></a></div>` +
+        `<div class='col-3 text-center'><a href='https://www.pratikdaigavane.me' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/internet.svg' alt=''></a></div>` +
+        `<div class='col-3 text-center'><a href='https://github.com/pratikdaigavane' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/github.svg' alt=''></a></div>` +
+        `<div class='col-3 text-center'><a href='mailto:daigavanep@gmail.com' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/email.svg' alt=''></a></div>` +
+        `<div class='col-3 text-center'><a href='https://linkedin.com/in/pratikdaigavane' target='_blank'><img width="30" height="30" src='https://pratikdaigavane.github.io/linkedin.svg' alt=''></a></div>` +
 
         `</div>` +
 
