@@ -19,16 +19,21 @@ function loginIn(e) {
         .then(data => {
             if (data.status === 'OK') {
                 console.log(data.result[0]);
-                chrome.storage.sync.set({
-                    'userName': data.result[0].handle,
-                    'userImg': `https:${data.result[0].titlePhoto}` || 'https://pratikdaigavane.github.io/img.png',
-                    'userFullName': (data.result[0].firstName || ' ') + " " + (data.result[0].lastName || ' '),
-                    'userRating': data.result[0].rating || '',
-                    'userOrg': data.result[0].organization || ''
-                }, function () {
-                    console.log('done');
-                    location.reload();
-                });
+                localStorage.setItem("userName", data.result[0].handle);
+                localStorage.setItem(
+                    "userImg",
+                    `https:${data.result[0].titlePhoto}` ||
+                    "https://pratikdaigavane.github.io/img.png"
+                );
+                localStorage.setItem(
+                    "userFullName",
+                    (data.result[0].firstName || " ") +
+                    " " +
+                    (data.result[0].lastName || " ")
+                );
+                localStorage.setItem("userRating", data.result[0].rating || "");
+                localStorage.setItem("userOrg", data.result[0].organization || "");
+                location.reload();
             } else {
                 alert('invalid username')
                 $("#loginButton").removeClass('disabled');
@@ -45,18 +50,17 @@ function loginIn(e) {
 
 
 
-chrome.storage.sync.get(['userName', 'userImg', 'userFullName', 'userRating', 'userOrg'], function (budget) {
-    // when user opens a2oj.com,  checking if the details is present in localsotrage
-    // and if then assigning those values to current session variables
-    if (budget.userName !== undefined) {
-        user = budget.userName;
-        userImg = budget.userImg || 'https://pratikdaigavane.github.io/img.png';
-        fullName = budget.userFullName || '';
-        rating = ("Rating: " + budget.userRating) || '';
-        organization = budget.userOrg || '';
-    }
-    renderResults();
-});
+if (localStorage.getItem("userName")) {
+    user = localStorage.getItem("userName");
+}
+userImg =
+    localStorage.getItem("userImg") ||
+    "https://pratikdaigavane.github.io/img.png";
+fullName = localStorage.getItem("userFullName") || "";
+rating = "Rating: " + localStorage.getItem("userRating") || "";
+organization = localStorage.getItem("userOrg") || "";
+renderResults();
+
 
 function renderResults() {
 
@@ -126,7 +130,7 @@ function renderResults() {
                     // console.log(`${x.problem.contestId} ${x.problem.index} => ${x.verdict}`);
                     if (x.verdict === 'OK') {
                         userProb.add(`${x.problem.contestId}/${x.problem.index}`)
-                        //1295/submission/69833817
+                            //1295/submission/69833817
                         if (!(x.problem.contestId in submissions)) {
                             submissions[`problem/${x.problem.contestId}/${x.problem.index}`] = `${x.problem.contestId}/submission/${x.id}`;
                         }
@@ -152,13 +156,13 @@ function renderResults() {
                         "background-color": "#00e676",
                         "color": "black"
                     })
-                    hello.parent().parent().hover(function () {
+                    hello.parent().parent().hover(function() {
                         $(this).css("background-color", "#00c853");
-                    }, function () {
+                    }, function() {
                         $(this).css("background-color", "#00e676");
                     });
                     let difficulty = hello.parent().parent().children().last().text()
-                    // console.log(difficulty);
+                        // console.log(difficulty);
                     hello.parent().parent().children().last().html(`<span>${difficulty}</span> &nbsp;&nbsp;&nbsp;<a href="${sub_url}" target="_blank"><span class="badge badge-dark">View Submission</span></a>`)
 
                 })
@@ -166,6 +170,3 @@ function renderResults() {
             });
     }
 }
-
-
-
