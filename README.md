@@ -19,7 +19,7 @@ Google Chrome: [https://chrome.google.com/webstore/detail/a2oj-enhancer/pdcdaboo
 
 Mozilla Firefox: [https://addons.mozilla.org/en-US/firefox/addon/a2oj-enhancer/](https://addons.mozilla.org/en-US/firefox/addon/a2oj-enhancer/)
 
-[![Get it from the Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_Badge_v2_340x96.png)](https://chrome.google.com/webstore/detail/a2oj-enhancer/pdcdabooahjnbjdhdipgipopcafoenke)
+[![Get it from the Web Store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/a2oj-enhancer/pdcdabooahjnbjdhdipgipopcafoenke)
 [![Get it from the Web Store](https://codeforces.com/predownloaded/bf/ee/bfee5b3f1a91f2b0ac88f778c100a9b68b0e5bf3.png)](https://addons.mozilla.org/en-US/firefox/addon/a2oj-enhancer/)
 
 

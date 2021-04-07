@@ -9,7 +9,7 @@
 // });
 
 chrome.runtime.onInstalled.addListener(function (object) {
-    chrome.tabs.create({url: "https://a2oj.pratikdaigavane.me"}, function (tab) {
-        console.log("New tab launched with https://a2oj.pratikdaigavane.me",object);
+    chrome.tabs.create({url: "https://a2oj.com"}, function (tab) {
+        console.log("New tab launched with https://a2oj.com",object);
     });
 });

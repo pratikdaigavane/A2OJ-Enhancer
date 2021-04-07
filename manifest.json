@@ -18,7 +18,7 @@
         "persistent": false
     },
     "content_scripts": [{
-        "matches": ["https://a2oj.pratikdaigavane.me/*"],
+        "matches": ["https://a2oj.com/*"],
         "js": ["js/jquery-3.4.1.min.js", "js/bootstrap.min.js", "js/content.js"],
         "css": ["css/content.css", "css/bootstrap.min.css"]
     }],
